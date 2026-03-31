@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education | Shedrack Mwiine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── EDUCATION PAGE STYLES ── */
+        .education-section {
+            padding: 4rem var(--page-pad) 6rem;
+        }
+
+        .education-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .education-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .education-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .education-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        /* ── EDUCATION TIMELINE ── */
+        .education-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .education-item {
+            display: grid;
+            grid-template-columns: 2.8rem 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .education-year {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            padding-top: 0.3rem;
+            text-align: right;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+
+        .education-content {
+            border-left: 1px solid var(--border-light);
+            padding-left: 2rem;
+        }
+
+        .education-degree {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+        }
+
+        .education-institution {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.2rem;
+        }
+
+        .education-bullets {
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: var(--muted);
+        }
+
+        .education-bullets ul {
+            padding-left: 1.2rem;
+            margin: 0;
+        }
+
+        .education-bullets li {
+            margin-bottom: 0.85rem;
+        }
+
+        .education-bullets li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            margin-top: 5rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--card-bg);
+            padding: 1.8rem 2rem;
+            border: 1px solid var(--border-light);
+            transition: all var(--transition);
+        }
+
+        .cert-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .cert-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+        }
+
+        .cert-provider {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .education-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .education-year {
+                text-align: left;
+                padding-top: 0;
+            }
+            .education-content {
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .education-section {
+                padding: 3rem var(--page-pad) 4rem;
+            }
+            .education-header {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav">
+    <a href="index.html" class="nav-brand">Shedrack</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="education.html" class="active">Education</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="nav-drawer">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero reveal">
+    <p class="page-hero-eyebrow">Background — Learning & Growth</p>
+    <h1 class="page-hero-title">Education &amp; <em>Certifications</em></h1>
+    <p class="page-hero-sub">Academic journey and professional development in Actuarial Science, Financial Engineering, Data Analytics, and Quantitative Finance.</p>
+</section>
+
+<!-- ── EDUCATION CONTENT ── -->
+<section class="education-section">
+    <div class="education-header">
+        <div>
+            <p class="education-label">ACADEMIC & PROFESSIONAL PATHWAY</p>
+            <h2 class="education-title">Education <em>Timeline</em></h2>
+        </div>
+    </div>
+
+    <div class="education-timeline">
+
+        <!-- MSc Financial Engineering -->
+        <div class="education-item reveal">
+            <div class="education-year">2026 – 2028<br><span style="font-size:0.65rem; color:var(--muted-light);">Ongoing</span></div>
+            <div class="education-content">
+                <h3 class="education-degree">MSc Financial Engineering</h3>
+                <p class="education-institution">WorldQuant University</p>
+                <div class="education-bullets">
+                    <ul>
+                        <li>Financial Markets: Analyze the structure and dynamics of global financial markets, including asset classes, market microstructure, and price discovery mechanisms</li>
+<li>Financial Data: Develop deep expertise in working with diverse financial datasets, from structured time series to unstructured alternative data, and apply Python for data sourcing, cleaning, visualization, and preparation for financial modeling</li>
+<li>Financial Econometrics: Apply statistical and econometric tools to model relationships in financial data, perform forecasting, and analyze time series behavior for pricing and risk applications</li>
+<li>Derivative Pricing: Study quantitative methods for valuing derivative instruments using mathematical models and computational techniques</li>
+<li>Stochastic Modeling: Learn stochastic processes and random systems as foundational tools for financial modelling under uncertainty</li>
+<li>Machine Learning in Finance: Use machine learning algorithms to extract patterns, enhance prediction, and support data-driven investment and risk strategies</li>
+<li>Deep Learning for Finance: Explore advanced neural network techniques for complex pattern detection and predictive modeling in financial contexts</li>
+<li>Portfolio Management: Understand principles of portfolio construction and optimization, diversification benefits, and risk-adjusted performance</li>
+<li>Risk Management: Learn quantitative risk measurement, stress testing, and scenario simulation frameworks used in professional risk analysis</li>
+<li>Capstone Project: Integrate learned theories and computational methods into an applied project that tackles a substantive financial engineering problem</li>                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- BSc Actuarial Science -->
+        <div class="education-item reveal reveal-delay-1">
+            <div class="education-year">2021 – 2025</div>
+            <div class="education-content">
+                <h3 class="education-degree">Bachelor of Business Science – Actuarial Science</h3>
+                <p class="education-institution">Strathmore University</p>
+                <div class="education-bullets">
+                    <ul>
+                        <li><strong>Year 1:</strong>
+  <ul>
+    <li><strong>Semester 1:</strong> Linear Algebra, Advanced Calculus & Optimization, Business Mathematics, Principles of Microeconomics, Introduction to Actuarial Science, Business Communication, Computer Applications</li>
+    <li><strong>Semester 2:</strong> Business Law, Probability Theory, Computer Concepts & Programming, Principles of Macroeconomics, Financial Accounting, Probability and Statistics I</li>
+  </ul>
+</li>
+
+<li><strong>Year 2:</strong>
+  <ul>
+    <li><strong>Semester 1:</strong> Financial Mathematics, Probability and Statistics II, Corporate Finance, Actuarial Mathematics I, Business Ethics</li>
+    <li><strong>Semester 2:</strong> Stochastic Models, Actuarial Mathematics II, Portfolio Management, Derivative Pricing, Econometrics I, Financial Reporting, Operations Research</li>
+  </ul>
+</li>
+
+<li><strong>Year 3:</strong>
+  <ul>
+    <li><strong>Semester 1:</strong> Survival Processes I, Statistical Inference, Econometrics II, Financial Economics, Actuarial Statistics, Business Research Methods</li>
+    <li><strong>Semester 2:</strong> Stochastic Processes II, Actuarial Modelling, Financial Risk Management, Pensions and Social Security, Introduction to Philosophy</li>
+  </ul>
+</li>
+
+<li><strong>Year 4:</strong>
+  <ul>
+    <li><strong>Semester 1:</strong> Advanced Actuarial Mathematics, Portfolio Management II, Risk Theory, Research Methodology</li>
+    <li><strong>Semester 2:</strong> General Insurance, Professional Practice in Actuarial Science, Actuarial Practice & Communication, Research Project</li>
+  </ul>
+</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diploma in Data Analytics -->
+        <div class="education-item reveal reveal-delay-2">
+            <div class="education-year">2025</div>
+            <div class="education-content">
+                <h3 class="education-degree">Executive Diploma in Data Analytics</h3>
+                <p class="education-institution">UniAthena</p>
+                <div class="education-bullets">
+                    <ul>
+                        <li><strong>Data Analytics Fundamentals:</strong> Built a strong foundation in the data analytics lifecycle, including problem definition, data collection, cleaning, exploration, and interpretation</li>
+    
+    <li><strong>Data Visualization using Power BI:</strong> Designed and developed interactive visual dashboards and reports to communicate insights and support business performance tracking</li>
+    
+    <li><strong>Big Data Analysis:</strong> Explored techniques for handling, processing, and deriving insights from large and complex datasets using contemporary analytical tools and methods</li>
+    
+    <li><strong>Cross-Tabulation Techniques:</strong> Applied categorical data analysis methods (such as cross-tabulations) to identify relationships and patterns between variables</li>
+    
+    <li><strong>Linear Regression Modeling & Correlation Analysis:</strong> Used statistical modeling to evaluate relationships between variables, measure strength of association, and build predictive regression models</li>
+    
+    <li><strong>Trend Analysis:</strong> Performed time-based and longitudinal data analysis to detect patterns and trends that inform strategic planning and forecasting</li>
+    
+    <li><strong>Business Analytics in Practice:</strong> Applied analytics techniques to real business scenarios, supporting decision support systems and actionable insights for operational improvement</li>
+    
+    <li><strong>Building Blocks of an Analysis Plan:</strong> Developed structured approaches to designing analytics projects, including defining objectives, selecting analytical methods, and outlining reporting strategies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- HSE Course -->
+        <div class="education-item reveal reveal-delay-3">
+            <div class="education-year">2020</div>
+            <div class="education-content">
+                <h3 class="education-degree">Probability, Statistics & Exploratory Data Analysis</h3>
+                <p class="education-institution">National Research University, Higher School of Economics</p>
+                <div class="education-bullets">
+                    <ul>
+                        <li>
+  <ul>
+    <li><strong>Combinatorics:</strong> Apply combinatorial methods in programming, Apply standard operations on sets, Categorize combinatorial problems into standard settings, Use methods of combinatories to count objects, Use properties of binomial coefficients</li>
+    
+    <li><strong>Advanced Combinatorics:</strong> Categorize combinatorial problems into standard settings, Combine several combinatorial settings to solve counting problems</li>
+    
+    <li><strong>Discrete Probability:</strong> Calculate probabilities of events using definition and properties of probabilities, evaluating random experiments, outcomes and events, Recognize operation and events (union, intersection, complement event)</li>
+    
+    <li><strong>Graphs:</strong> Use standard algorithms for traversing graphs, Understanding properties and types of graphs, given by geometric representation, understanding graphs used in various application areas</li>
+    
+    <li><strong>Exploratory Data Analysis (EDA):</strong> Data visualization, descriptive statistics, correlation/covariance analysis, outlier detection, dimensionality reduction</li>
+    
+    <li><strong>Graph Parameters:</strong> Analyze the structure of graphs using parameters: clustering coefficients, diameter etc, graph parameters and their usage in network analysis, Use graph parameters for establishing non-isomorphism of graphs</li>
+    
+    <li><strong>Graphs of Social Networks:</strong> Compare social network graphs (from datasets) with random graphs, and see how the parameters change, Develop graph analysis software in Python using NetworkX, Practice in using Network for social network analysis</li>
+  </ul>
+</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Certifications -->
+<div class="certifications-section">
+    <div class="projects-section-header" style="margin-bottom: 2.5rem;">
+        <div>
+            <p class="projects-section-label">SELECTED CERTIFICATIONS</p>
+            <h2 class="projects-section-title" style="font-size: 1.85rem;">Professional <em>Development</em></h2>
+        </div>
+    </div>
+
+    <div class="certifications-grid">
+        <div class="cert-card reveal">
+            <p class="cert-provider">Certificate</p>
+            <h3 class="cert-title">
+                <a href="https://credsverse.com/credentials/00d5c6f8-70a3-4b0d-ae62-3f745070b1a0" target="_blank">
+                    Climate & Carbon Data Intelligence Training
+                </a>
+            </h3>
+        </div>
+
+        <div class="cert-card reveal reveal-delay-1">
+            <p class="cert-provider">Certificate</p>
+            <h3 class="cert-title">
+                <a href="https://udemy-certificate.s3.amazonaws.com/pdf/UC-a38ac63e-a9a8-4418-be43-b6d641c5b664.pdf" target="_blank">
+                    Project Finance & Excel
+                </a>
+            </h3>
+        </div>
+
+        <div class="cert-card reveal reveal-delay-2">
+            <p class="cert-provider">Professional Certificate</p>
+            <h3 class="cert-title">
+                <a href="https://www.credly.com/badges/908f949f-9a5f-45c0-baaa-14d2e786e05a/linked_in_profile" target="_blank">
+                    Mckinsey Forward Program
+                </a>
+            </h3>
+        </div>
+
+        <div class="cert-card reveal">
+            <p class="cert-provider">Professional Certificate</p>
+            <h3 class="cert-title">
+                <a href="https://www.linkedin.com/learning/certificates/c0d3273b394640e9c2a1631f375019319d8f10b6165e114cfe39ea31a2e8c70d?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bn%2Ff66irnRB6xqNrNXCfMyA%3D%3D" target="_blank">
+                    AI Orchestration: Planning & Orchestration for Observability
+                </a>
+            </h3>
+        </div>
+
+        <div class="cert-card reveal reveal-delay-1">
+            <p class="cert-provider">Professional Certificate</p>
+            <h3 class="cert-title">
+                <a href="https://www.linkedin.com/learning/certificates/1837a129b9423ff7c6cec7e5af97560d12d0da4455fdec9ffdf7427116df0b30?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bn%2Ff66irnRB6xqNrNXCfMyA%3D%3D" target="_blank">
+                    AI Orchestration: Designing the Prototype Architecture and Data Strategy
+                </a>
+            </h3>
+        </div>
+
+        <div class="cert-card reveal reveal-delay-2">
+            <p class="cert-provider">Certificate</p>
+            <h3 class="cert-title">Certificate in Business Analytics</h3>
+        </div>
+
+        <div class="cert-card reveal">
+            <p class="cert-provider">Certificate</p>
+            <h3 class="cert-title">Certificate in Introduction to Data Science with Python</h3>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <span class="footer-left">© 2026 Shedrack Mwiine</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/shedrack-mwiine-6a0851293" target="_blank">LinkedIn</a>
+        <a href="https://github.com/MwiineShedrack" target="_blank">GitHub</a>
+        <a href="https://independent.academia.edu/ShedrackMwiine" target="_blank">Academia</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

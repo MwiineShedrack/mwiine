@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Shedrack Mwiine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── SECTION HEADERS ── */
+        .projects-section {
+            padding: 4rem var(--page-pad) 0;
+        }
+
+        .projects-section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+        }
+
+        .projects-section-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .projects-section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .projects-section-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .projects-section-count {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            color: var(--muted-light);
+            white-space: nowrap;
+        }
+
+        /* ── PROJECTS NAVIGATION BUTTONS ── */
+        .projects-nav {
+            display: flex;
+            gap: 0.8rem;
+            padding: 2rem var(--page-pad) 1.5rem;
+            flex-wrap: wrap;
+            background: var(--paper);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .project-nav-btn {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.85rem 1.6rem;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--ink);
+            text-decoration: none;
+            transition: all var(--transition);
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .project-nav-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(184, 134, 11, 0.05);
+        }
+
+        .project-nav-btn.active {
+            background: var(--ink);
+            color: var(--paper);
+            border-color: var(--ink);
+        }
+
+        /* ── RESEARCH LIST ── */
+        .research-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .research-item {
+            display: grid;
+            grid-template-columns: 2.4rem 1fr;
+            gap: 1.5rem;
+            padding: 1.8rem 0;
+            border-bottom: 1px solid var(--border-light);
+            align-items: start;
+            transition: background var(--transition);
+        }
+
+        .research-item:last-child {
+            border-bottom: none;
+        }
+
+        .research-num {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            color: var(--muted-light);
+            padding-top: 0.35rem;
+            text-align: right;
+        }
+
+        .research-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .research-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.25;
+        }
+
+        .research-summary {
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.75;
+            max-width: 720px;
+        }
+
+        .research-tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(184, 134, 11, 0.3);
+            padding: 0.2rem 0.6rem;
+            margin-top: 0.2rem;
+        }
+
+        .research-academia-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted-light);
+            margin-top: 0.5rem;
+            transition: color var(--transition);
+            text-decoration: none;
+        }
+
+        .research-academia-link:hover {
+            color: var(--accent);
+        }
+
+        .research-academia-link svg {
+            width: 11px; height: 11px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            transition: transform 0.2s ease;
+        }
+
+        .research-academia-link:hover svg {
+            transform: translate(2px, -2px);
+        }
+
+        /* ── TOOLS GRID ── */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-light);
+            border: 1px solid var(--border-light);
+            margin-top: 0;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            padding: 2rem 2.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            transition: background var(--transition);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            background: var(--card-hover);
+        }
+
+        .tool-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .tool-card-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+
+        .tool-card-arrow {
+            width: 28px; height: 28px;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: border-color var(--transition), background var(--transition);
+        }
+
+        .tool-card:hover .tool-card-arrow {
+            border-color: var(--ink);
+            background: var(--ink);
+        }
+
+        .tool-card-arrow svg {
+            width: 11px; height: 11px;
+            fill: none;
+            stroke: var(--ink);
+            stroke-width: 1.5;
+            transition: stroke var(--transition), transform 0.2s ease;
+        }
+
+        .tool-card:hover .tool-card-arrow svg {
+            stroke: var(--paper);
+            transform: translate(1px, -1px);
+        }
+
+        .tool-card-desc {
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .tool-card-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: auto;
+        }
+
+        .tool-tag {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: var(--paper);
+            border: 1px solid var(--border);
+            padding: 0.2rem 0.6rem;
+        }
+
+        /* ── FINANCIAL MODELS ── */
+        .models-section {
+            padding: 4rem var(--page-pad) 6rem;
+        }
+
+        .models-disclaimer {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            color: var(--muted-light);
+            line-height: 1.8;
+            border-left: 2px solid var(--border);
+            padding: 1rem 1.4rem;
+            margin: 1.5rem 0 0;
+            background: var(--card-bg);
+            font-style: italic;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-light);
+            border: 1px solid var(--border-light);
+            margin-top: 1px;
+        }
+
+        .model-card {
+            background: var(--card-bg);
+            padding: 2rem 2.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            transition: background var(--transition);
+        }
+
+        .model-card:hover {
+            background: var(--card-hover);
+        }
+
+        .model-card-label {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .model-card-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.25;
+        }
+
+        .model-card-desc {
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .model-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink);
+            border: 1px solid var(--border);
+            padding: 0.55rem 1.1rem;
+            margin-top: auto;
+            align-self: flex-start;
+            transition: background var(--transition), border-color var(--transition), color var(--transition);
+            text-decoration: none;
+        }
+
+        .model-card-link:hover {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: var(--paper);
+        }
+
+        .model-card-link svg {
+            width: 11px; height: 11px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+        }
+
+        /* ── SPACER BETWEEN SECTIONS ── */
+        .section-gap {
+            height: 2rem;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 860px) {
+            .tools-grid,
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .projects-section { padding: 3rem var(--page-pad) 0; }
+            .models-section { padding: 3rem var(--page-pad) 4rem; }
+            .projects-section-header { flex-direction: column; gap: 0.4rem; }
+            .projects-nav {
+                padding: 1.5rem var(--page-pad) 1rem;
+                gap: 0.6rem;
+            }
+            .project-nav-btn {
+                padding: 0.75rem 1.3rem;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav">
+    <a href="index.html" class="nav-brand">Shedrack</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="nav-drawer">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero reveal">
+    <p class="page-hero-eyebrow">Work — Research & Builds</p>
+    <h1 class="page-hero-title">Projects &amp; <em>Research</em></h1>
+    <p class="page-hero-sub">A collection of research papers, interactive tools, and financial models spanning fintech, climate finance, macroeconomics, and data analytics.</p>
+</section>
+
+<!-- ════════════════════════════════════════
+     PROJECTS NAVIGATION
+     ════════════════════════════════════════ -->
+<div class="projects-nav">
+    <a href="#research" class="project-nav-btn active">Research & Writing</a>
+    <a href="#tools" class="project-nav-btn">Programming & Tools</a>
+    <a href="#models" class="project-nav-btn">Financial Models</a>
+</div>
+
+<!-- ════════════════════════════════════════
+     SECTION 1 — RESEARCH & WRITING
+     ════════════════════════════════════════ -->
+<section id="research" class="projects-section">
+    <div class="projects-section-header">
+        <div>
+            <p class="projects-section-label">01 — Research &amp; Writing</p>
+            <h2 class="projects-section-title">Academic &amp; <em>Analytical</em> Papers</h2>
+        </div>
+        <span class="projects-section-count">11 works · Full papers on Academia.edu</span>
+    </div>
+
+    <div class="research-list">
+
+        <div class="research-item reveal">
+            <span class="research-num">01</span>
+            <div class="research-body">
+                <h3 class="research-title">Security and Resilience in Data Systems</h3>
+                <p class="research-summary">This paper argues that while frameworks like Kenya’s Data Protection Act and the Malabo Convention have strengthened privacy and compliance in Africa’s digital economy, they are not sufficient to ensure data system continuity during disruptions such as cyberattacks or infrastructure failures. It introduces a Resilience by Design paradigm that embeds resilience into the architecture, operations, and governance of data systems. The study integrates technical approaches such as zero trust architecture, fault tolerance, multi cloud redundancy, and immutable data storage, linking them to measurable resilience metrics like recovery time and data integrity loss. It also proposes governance reforms including resilience audits, stronger Computer Emergency Response Teams, and cross border coordination. The paper concludes with a tiered adoption roadmap and policy recommendations to harmonize resilience within existing data protection regimes, positioning resilient data systems as essential to Africa’s trusted and inclusive digital transformation..</p>
+                <span class="research-tag">Data Governance · Cybersecurity · Africa</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-1">
+            <span class="research-num">02</span>
+            <div class="research-body">
+                <h3 class="research-title">Carbon Sequestration Strategies: Biochar as a Credit Engine in East Africa</h3>
+                <p class="research-summary">Biochar production via pyrolysis is emerging in Kenya as a waste-to-value pathway that can simultaneously address organic waste burdens, soil fertility decline, and the growing market for durable carbon removals. This analysis synthesizes (i) interview-derived operational evidence from industrial producers and (ii) deskbased evidence spanning Kenya’s feedstock landscape, processing yields, standards/certification requirements, market pricing, carbon regulation, and emerging commercial models. Findings show that: (1) feedstock logistics and moisture variability, rather than absolute biomass availability, are the dominant constraints on unit economics; (2) carbon finance is frequently decisive for commercial viability at scale, but is gated by measurement, reporting and verification (MRV) and certification readiness; (3) Kenya’s regulatory environment increasingly requires international-grade certification and validation for carbon market participation through the Climate Change (Carbon Markets) Regulations, 2024; and (4) scalable adoption in agriculture depends on embedding biochar into existing fertilizer/soil-input distribution channels, not treating it as a standalone niche product. Recommendations focus on (a) county-backed feedstock aggregation hubs, (b) demand anchoring through fertilizer firms and structured farmer programs, and (c) accelerated national MRV capability-building and standard alignment.</p>
+                <span class="research-tag">Climate Finance · Carbon Markets · East Africa</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-2">
+            <span class="research-num">03</span>
+            <div class="research-body">
+                <h3 class="research-title">Financing the Shift from High-Carbon to Low-Carbon Economies</h3>
+                <p class="research-summary">This article examines transition bonds as an emerging financial instrument designed to support companies shifting from high carbon to low carbon operations. While green bonds have traditionally dominated sustainable finance, transition bonds provide a pathway for industries that are not yet fully aligned with green standards but are actively decarbonizing. The paper contrasts transition bonds and green bonds in terms of structure, purpose, and market positioning, and evaluates their respective roles in advancing decarbonization and enabling the transition toward net zero economies.</p>
+                <span class="research-tag">Transition Finance · Sustainable Bonds</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-3">
+            <span class="research-num">04</span>
+            <div class="research-body">
+                <h3 class="research-title">The Role of Carbon Pricing in Climate Mitigation, Africa</h3>
+                <p class="research-summary">This paper examines the potential of carbon pricing, through mechanisms like carbon taxes and cap-and-trade systems, as a tool for climate mitigation in Africa. It highlights the challenges and opportunities associated with implementing carbon pricing in the continent’s unique economic and developmental context. The paper explores the economic impact of carbon pricing, its role in decarbonization, and offers policy recommendations for effective implementation. By analyzing global case studies, the paper identifies key strategies for overcoming barriers and ensuring a just, sustainable transition to a low-carbon economy in Africa.</p>
+                <span class="research-tag">Carbon Pricing · Climate Policy · Africa</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal">
+            <span class="research-num">05</span>
+            <div class="research-body">
+                <h3 class="research-title">Macroeconomic Factors Affecting Exchange Rate Volatility in Kenya</h3>
+                <p class="research-summary">This study examines exchange rate dynamics in Kenya, focusing on the Kenyan Shilling against major currencies including the US Dollar, Euro, Ugandan Shilling, and British Pound. While the KES/USD pair has historically drawn the most attention due to the dollar’s dominance in global trade and finance, the research expands the analysis to provide a broader and more holistic understanding of Kenya’s currency movements. The paper explores how macroeconomic factors such as inflation differentials, interest rate disparities, trade balances, remittance flows, and external shocks interact to shape exchange rate volatility in a small open economy. It highlights the significant depreciation and volatility of the Kenyan Shilling over the past two decades and evaluates the economic consequences for growth, price stability, trade competitiveness, and foreign denominated debt. Using advanced econometric techniques, including GARCH family models and vector autoregression, the study identifies key drivers of currency volatility and provides data driven insights relevant to monetary policy formulation and hedging strategies. By linking macroeconomic variables to exchange rate behavior, the research contributes practical and policy relevant understanding to economists, financial analysts, and policymakers.</p>
+                <span class="research-tag">Macroeconomics · FX · Kenya</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-1">
+            <span class="research-num">06</span>
+            <div class="research-body">
+                <h3 class="research-title">Behavioral Finance &amp; Investment Decision-Making</h3>
+                <p class="research-summary">This article explores behavioural finance and its implications for personal investing, emphasizing that financial decisions are shaped not only by data and models but also by human psychology. Challenging the traditional assumption that investors are purely rational and risk averse, the study highlights how emotions and cognitive biases influence decision making and often lead to suboptimal outcomes. By examining key behavioural finance principles, the article explains how heuristics and emotional reactions distort perceptions of risk and reward. It encourages greater self awareness in investment decision making, helping individuals recognize and manage the psychological factors that influence their financial choices.</p>
+                <span class="research-tag">Behavioral Finance · Investing · Psychology</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-2">
+            <span class="research-num">07</span>
+            <div class="research-body">
+                <h3 class="research-title">2025 Society of Actuaries Research Case Study Challenge</h3>
+                <p class="research-summary">Earthen dams are critical to Tarrodan’s (hypothetical country used for the research challenge) water supply, irrigation, hydropower, and flood control, yet their structural integrity is increasingly threatened by erosion, seismic activity, and climate change. This study develops and evaluates the National Earthen Dam Insurance Program (NEDIP), a comprehensive risk-transfer and resilience framework designed to safeguard fiscal stability while incentivizing infrastructure improvements. Leveraging the National Dam Risk Database (NDRD), actuarial modeling, and AI-powered underwriting, NEDIP introduces risk-based premium structures, semi-mandatory participation, and tiered subsidies to balance affordability with solvency. Financial projections from 2024–2045 demonstrate positive net cash flows across regions, supported by reinsurance treaties, government contributions, and adaptive reserve management. Sensitivity analyses confirm resilience under climate stress scenarios, while dynamic recalibration ensures premiums reflect evolving hazard profiles. Beyond insurance, NEDIP channels revenues into preventative maintenance and structural reinforcements, reducing long-term liabilities and enhancing dam safety. By integrating actuarial rigor, climate risk analytics, and infrastructure investment, NEDIP establishes a scalable model for national disaster risk financing, aligning fiscal sustainability with proactive resilience in the face of escalating environmental uncertainty.</p>
+                <span class="research-tag">Actuarial Science · Infrastructure Risk · Climate</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-3">
+            <span class="research-num">08</span>
+            <div class="research-body">
+                <h3 class="research-title">Exploring the Future of Humanity and Artificial Consciousness</h3>
+                <p class="research-summary">This thought piece explores the philosophical, legal, and existential trajectory of artificial intelligence, tracing its evolution from a theoretical concept to a transformative force that mirrors human cognition. It argues that AI represents a departure from all prior technologies, not merely as an instrument of efficiency but as an emergent form of intelligence modeled upon humanity itself. The analysis begins with the origins of AI, from Turing’s logic to the neural architectures of the twenty-first century and contrasts its exponential progression with the linear growth patterns of previous innovations. While celebrating AI’s potential to revolutionize work, creativity, and connection, this piece confronts the implications of leaving its evolution unregulated.</p>
+                <span class="research-tag">AI · Philosophy · Consciousness</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal">
+            <span class="research-num">09</span>
+            <div class="research-body">
+                <h3 class="research-title">Financial Dimensional Modelling</h3>
+                <p class="research-summary">This educational piece provides a comprehensive exploration of Financial Dimensional Modeling, an essential framework for structuring financial data to enhance analytical efficiency and reporting accuracy. The study examines the theoretical foundations and practical applications of dimensional modeling, emphasizing its role in transforming complex financial systems into intelligible, decision-ready data structures. Through an educational approach, the paper explains key components such as fact and dimension tables, schema architectures, hierarchies, and data granularity. It further analyzes how dimensional modeling supports performance measurement, variance analysis, and financial consolidation within data-driven organizations.</p>
+                <span class="research-tag">Data Modeling · Finance · Analytics</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-1">
+            <span class="research-num">10</span>
+            <div class="research-body">
+                <h3 class="research-title">Financing Green Technology in Emerging Markets: Challenges and Opportunities</h3>
+                <p class="research-summary">This paper examines the financing of green technology in emerging markets, focusing on Africa and other developing regions. It highlights opportunities in renewable energy, sustainable agriculture, water management, waste management, and transportation. Adoption is slowed by high costs, limited capital, regulatory barriers, and investment risks. The study reviews financing models such as public and private mechanisms, green bonds, blended finance, and mobile-based pay-as-you-go systems. Case studies, including M-KOPA Solar in Kenya, show how fintech can expand access.</p>
+                <span class="research-tag">Green Finance · Emerging Markets · Development</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="research-item reveal reveal-delay-2">
+            <span class="research-num">11</span>
+            <div class="research-body">
+                <h3 class="research-title">The Concept of Free Will</h3>
+                <p class="research-summary">The debate over free will, whether it is an illusion or a genuine aspect of human experience, has long intrigued philosophers, scientists, and the general public. This essay explores the complex interplay between free will and various theoretical models, including determinism and stochastic theories. We begin by defining free will, clarifying it as the ability to make choices unconstrained by external factors, and distinguishing it from related concepts such as autonomy and agency.</p>
+                <span class="research-tag">Philosophy · Free Will · Consciousness</span>
+                <a class="research-academia-link" href="https://independent.academia.edu/ShedrackMwiine" target="_blank">
+                    Read on Academia.edu
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SECTION 2 — PROGRAMMING & TOOLS
+     ════════════════════════════════════════ -->
+<div class="section-gap"></div>
+<section id="tools" class="projects-section">
+    <div class="projects-section-header">
+        <div>
+            <p class="projects-section-label">02 — Programming &amp; Tools</p>
+            <h2 class="projects-section-title">Interactive <em>Applications</em></h2>
+        </div>
+        <span class="projects-section-count">4 live tools</span>
+    </div>
+
+    <div class="tools-grid">
+
+        <a class="tool-card reveal" href="https://mwiineshedrack.github.io/ai-portfolio-optimizer/" target="_blank">
+            <div class="tool-card-header">
+                <h3 class="tool-card-title">AI Portfolio Optimizer</h3>
+                <div class="tool-card-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </div>
+            </div>
+            <p class="tool-card-desc">Award-winning interactive tool enhancing classical mean-variance portfolio optimization with neural networks to capture non-linear return patterns, delivering better out-of-sample risk-adjusted performance and dynamic efficient frontier visualization.</p>
+            <div class="tool-card-stack">
+                <span class="tool-tag">R</span>
+                <span class="tool-tag">H2O.ai</span>
+                <span class="tool-tag">Shiny</span>
+                <span class="tool-tag">HTML/CSS</span>
+            </div>
+        </a>
+
+        <a class="tool-card reveal reveal-delay-1" href="https://reckon.streamlit.app/" target="_blank">
+            <div class="tool-card-header">
+                <h3 class="tool-card-title">Reckon — Data Analytics Web App</h3>
+                <div class="tool-card-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </div>
+            </div>
+            <p class="tool-card-desc">User-friendly platform allowing data upload, automated exploratory data analysis, custom interactive dashboard creation, and professional report export, ideal for business users seeking fast insights without writing code.</p>
+            <div class="tool-card-stack">
+                <span class="tool-tag">Streamlit</span>
+                <span class="tool-tag">Pandas</span>
+                <span class="tool-tag">Plotly</span>
+                <span class="tool-tag">Python</span>
+            </div>
+        </a>
+
+        <a class="tool-card reveal reveal-delay-2" href="https://sandboxinvestmentsimulator.streamlit.app/" target="_blank">
+            <div class="tool-card-header">
+                <h3 class="tool-card-title">Investment Sandbox Simulator</h3>
+                <div class="tool-card-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </div>
+            </div>
+            <p class="tool-card-desc">Real-time Monte Carlo simulation engine for stress-testing investment and retirement portfolios under thousands of randomized market paths. Users adjust allocations, horizons, withdrawals, and risk settings to explore probable outcomes.</p>
+            <div class="tool-card-stack">
+                <span class="tool-tag">Streamlit</span>
+                <span class="tool-tag">NumPy</span>
+                <span class="tool-tag">SciPy</span>
+                <span class="tool-tag">Matplotlib</span>
+            </div>
+        </a>
+
+        <a class="tool-card reveal reveal-delay-3" href="https://revelations.streamlit.app/" target="_blank">
+            <div class="tool-card-header">
+                <h3 class="tool-card-title">Revelations — Insights App</h3>
+                <div class="tool-card-arrow">
+                    <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </div>
+            </div>
+            <p class="tool-card-desc">Designed to be the ideal exploratory data analytics tool. Provides extensive data insights on any uploaded dataset, giving analysts a comprehensive breakdown of what their data constitutes, distribution patterns, and structural anomalies.</p>
+            <div class="tool-card-stack">
+                <span class="tool-tag">Streamlit</span>
+                <span class="tool-tag">Python</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SECTION 3 — FINANCIAL MODELS
+     ════════════════════════════════════════ -->
+<section id="models" class="models-section">
+    <div class="projects-section-header">
+        <div>
+            <p class="projects-section-label">03 — Financial Models</p>
+            <h2 class="projects-section-title">Quantitative <em>Models</em></h2>
+        </div>
+        <span class="projects-section-count">2 models</span>
+    </div>
+
+    <p class="models-disclaimer">Disclaimer: The financial models presented here are only those I am permitted to share by my employers. Any additional models I have developed are not shared due to professional privacy and contractual obligations.</p>
+
+    <div class="models-grid">
+
+        <div class="model-card reveal">
+            <span class="model-card-label">Insurance · Risk</span>
+            <h3 class="model-card-title">National Insurance Program Financial Model</h3>
+            <p class="model-card-desc">This financial model is built to assess the sustainability and risk-adjusted performance of a national insurance program covering dam-related hazards. It integrates actuarial calculations of expected losses, premium income, reinsurance costs, and catastrophe load factors, while adjusting for climate change impacts like floods, avalanches, and coastal erosion. The model accounts for risk scores tied to dam hazard, inspection delays, age, housing value, and infrastructure damage, then translates these into premiums, claims, recoveries, and capital reserve requirements. It also projects net cash flows over time, incorporating government subsidies, reinsurance recoveries, investment returns, and inflation adjustments, providing a comprehensive framework for evaluating long-term financial viability and resilience of the insurance program.</p>
+            <a class="model-card-link" href="https://1drv.ms/x/c/aa137624847d549d/IQBsvJT9Xjo_RLLLTFM4F3qQAVyr4Rg0Jh1niZyjwJtmMPc?e=UneaOf" target="_blank">
+                Open model
+                <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+        </div>
+
+        <div class="model-card reveal reveal-delay-1">
+            <span class="model-card-label">Climate · Investment</span>
+            <h3 class="model-card-title">Biochar &amp; Carbon Credits Facility Financial Model</h3>
+            <p class="model-card-desc">This financial model is designed to evaluate the investment returns of a biochar and carbon credits facility in Kenya over a 10-year horizon. It allows users to input assumptions on capacity, utilization, feedstock costs, biochar pricing, carbon credit revenues, financing structure, and operating expenses, calculates production volumes, revenues, costs, depreciation, taxes, and financing schedules. The model outputs key investor metrics such as project IRR, NPV, equity IRR, payback period, and sensitivity analyses under different scenarios.</p>
+            <a class="model-card-link" href="https://1drv.ms/x/c/aa137624847d549d/IQDJoy7ZcJCrT5KLa7OrIVY3ARzbIxPc8e_zUnMjQV-lye4?e=9nAA98" target="_blank">
+                Open model
+                <svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <span class="footer-left">© 2026 Shedrack Mwiine</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/shedrack-mwiine-6a0851293" target="_blank">LinkedIn</a>
+        <a href="https://github.com/MwiineShedrack" target="_blank">GitHub</a>
+        <a href="https://independent.academia.edu/ShedrackMwiine" target="_blank">Academia</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+
+<!-- Optional: Add this script for better navigation behavior -->
+<script>
+    // Smooth scrolling and active button highlighting
+    document.querySelectorAll('.project-nav-btn').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.project-nav-btn').forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+        });
+    });
+
+    // Optional: Highlight active section on scroll (advanced)
+    window.addEventListener('scroll', () => {
+        const sections = ['research', 'tools', 'models'];
+        const navButtons = document.querySelectorAll('.project-nav-btn');
+        
+        let current = '';
+        
+        sections.forEach(sectionId => {
+            const section = document.getElementById(sectionId);
+            const sectionTop = section.offsetTop;
+            
+            if (scrollY >= sectionTop - 200) {
+                current = sectionId;
+            }
+        });
+        
+        navButtons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('href') === `#${current}`) {
+                btn.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

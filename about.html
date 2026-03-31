@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Shedrack Mwiine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── ABOUT PAGE STYLES ── */
+        .about-section {
+            padding: 5rem var(--page-pad) 8rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 4rem;
+        }
+
+        .about-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .about-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--ink);
+        }
+
+        .about-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .about-intro {
+            font-family: var(--font-serif);
+            font-size: 1.45rem;
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--ink);
+            max-width: 720px;
+            margin-bottom: 3.5rem;
+        }
+
+        /* Justified & Neater Paragraphs */
+        .about-body {
+            font-size: 0.96rem;
+            line-height: 1.88;
+            color: #3a3530;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+        }
+
+        .about-body p {
+            margin-bottom: 1.65rem;
+        }
+
+        .about-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .status-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 1rem 1.6rem;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            margin-top: 3.5rem;
+            width: fit-content;
+        }
+
+        .status-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.85); }
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .about-body {
+                text-align: left;           /* Justification looks better left-aligned on mobile */
+                column-count: 1;
+            }
+            .about-section {
+                padding: 3.5rem var(--page-pad) 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav">
+    <a href="index.html" class="nav-brand">Shedrack</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="nav-drawer">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero reveal">
+    <p class="page-hero-eyebrow">Background — The Full Picture</p>
+    <h1 class="page-hero-title">About <em>Me</em></h1>
+    <p class="page-hero-sub">Interdisciplinary thinker at the intersection of quantitative finance, data, sustainability, and human systems.</p>
+</section>
+
+<!-- ── ABOUT CONTENT ── -->
+<section class="about-section">
+    <div class="about-header">
+        <div>
+            <p class="about-label">MY STORY</p>
+            <h2 class="about-title">The Full <em>Picture</em></h2>
+        </div>
+    </div>
+
+    <p class="about-intro">
+        Shedrack Mwiine is an interdisciplinary professional and researcher at the intersection of data, sustainability, human systems, strategic decision making, finance, and investments.
+    </p>
+
+    <div class="about-body">
+        <p>Currently pursuing a Master of Science in Financial Engineering at WorldQuant University, he represents a disciplined fusion of mathematical rigor, computational strength, and systems-level thinking. A graduate of Actuarial Science from Strathmore University, Shedrack has consistently translated theory into measurable impact.</p>
+
+        <p>His work spans data and financial analytics, inter-disciplinary research, stakeholder engagements, and sustainable agricultural value chains. As a Consultant in Economic and Statistical Research at the Decarbonize Initiative, he develops financial and econometric models that assess the viability of carbon sequestration projects across Sub-Saharan Africa — sitting at the convergence of climate science, agriculture, finance, and policy.</p>
+
+        <p>Previously at IDH – The Sustainable Trade Initiative, he strengthened smallholder inclusive business models by shaping how data was processed, interpreted, and communicated to investors, governments, and knowledge partners. He performed holistic commercial, social, and environmental assessments and developed benchmarking insights from more than 185 case studies.</p>
+
+        <p>Beyond technical execution, Shedrack is deeply people-facing. He conducts structured stakeholder interviews, facilitates evidence-based conversations, and participates in panel discussions and economic debate forums. Whether engaging farmers, program managers, investors, or policy actors, he understands that strong models must be matched by strong relationships.</p>
+
+        <p>Technically fluent in R, Python, Power BI, SQL, and advanced Excel, he designs automated analytics systems, builds real-time dashboards, architects data governance frameworks, and develops forecasting tools. His award-winning Mean Variance Portfolio Optimization application — recognized at the 2024 KAPS Nairobi Hackathon — demonstrates his ability to merge neural networks, financial theory, and engineering discipline into functional innovation.</p>
+
+        <p>As an independent researcher, his work on green finance, carbon pricing, exchange rate volatility in Kenya, behavioral finance, data resilience, and the philosophical architecture of free will has reached readers in 73 countries. Recognized through the McKinsey Forward Program and honored in national economics debates and actuarial research challenges, he stands at the intersection of leadership, analysis, and long-term vision.</p>
+    </div>
+
+    <div class="status-bar">
+        <span class="status-dot"></span>
+        Open to opportunities
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <span class="footer-left">© 2026 Shedrack Mwiine</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/shedrack-mwiine-6a0851293" target="_blank">LinkedIn</a>
+        <a href="https://github.com/MwiineShedrack" target="_blank">GitHub</a>
+        <a href="https://independent.academia.edu/ShedrackMwiine" target="_blank">Academia</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

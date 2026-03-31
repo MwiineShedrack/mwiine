@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Shedrack Mwiine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── CONTACT PAGE STYLES ── */
+        .contact-section {
+            padding: 4rem var(--page-pad) 8rem;
+            max-width: 720px;
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3.5rem;
+        }
+
+        .contact-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .contact-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .contact-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .contact-info {
+            margin-bottom: 4rem;
+        }
+
+        .contact-name {
+            font-family: var(--font-serif);
+            font-size: 1.85rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-location {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            font-size: 1.05rem;
+        }
+
+        .contact-detail strong {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            min-width: 70px;
+        }
+
+        .contact-email {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .contact-email:hover {
+            color: var(--ink);
+        }
+
+        .open-to {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .open-to h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--ink);
+            margin-bottom: 1.8rem;
+        }
+
+        .open-to ul {
+            list-style: none;
+            padding: 0;
+            font-family: var(--font-sans);
+            font-size: 1.02rem;
+            line-height: 1.85;
+            color: var(--muted);
+        }
+
+        .open-to li {
+            margin-bottom: 1.1rem;
+            position: relative;
+            padding-left: 1.6rem;
+        }
+
+        .open-to li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .response-note {
+            margin-top: 4rem;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--muted-light);
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+        /* Responsive */
+        @media (max-width: 580px) {
+            .contact-section {
+                padding: 3rem var(--page-pad) 6rem;
+            }
+            .contact-name {
+                font-size: 1.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav">
+    <a href="index.html" class="nav-brand">Shedrack</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="nav-drawer">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero reveal">
+    <p class="page-hero-eyebrow">Let's Connect</p>
+    <h1 class="page-hero-title">Get in <em>Touch</em></h1>
+    <p class="page-hero-sub">I'm always interested in meaningful conversations around quantitative finance, climate solutions, data analytics, and sustainable development.</p>
+</section>
+
+<!-- ── CONTACT CONTENT ── -->
+<section class="contact-section">
+    <div class="contact-header">
+        <div>
+            <p class="contact-label">REACH OUT</p>
+            <h2 class="contact-title">Contact <em>Information</em></h2>
+        </div>
+    </div>
+
+    <div class="contact-info">
+        <h3 class="contact-name">Shedrack Mwiine</h3>
+        <p class="contact-location">Nairobi, Kenya</p>
+
+        <div class="contact-detail">
+            <strong>Email</strong>
+            <a href="mailto:shedrackmwiine40@gmail.com" class="contact-email">shedrackmwiine40@gmail.com</a>
+        </div>
+
+        <div class="contact-detail">
+            <strong>Phone</strong>
+            <span>+254 795 444 070</span>
+        </div>
+    </div>
+
+    <div class="open-to">
+        <h3>I'm open to</h3>
+        <ul>
+            <li>Research collaborations</li>
+            <li>Consulting engagements (financial modeling, Quantitative & Qualitative Analysis, Sustainability Assessments, Stakeholder Engagements & Partnerships)</li>
+            <li>Project finance and investment modeling assignments</li>
+            <li>Speaking opportunities and panel discussions</li>
+            <li>Academic / professional mentorship in quantitative finance & actuarial science</li>
+        </ul>
+    </div>
+
+    <p class="response-note">
+        Feel free to reach out via email or LinkedIn.<br>
+        I usually respond within 24–48 hours.
+    </p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <span class="footer-left">© 2026 Shedrack Mwiine</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/shedrack-mwiine-6a0851293" target="_blank">LinkedIn</a>
+        <a href="https://github.com/MwiineShedrack" target="_blank">GitHub</a>
+        <a href="https://independent.academia.edu/ShedrackMwiine" target="_blank">Academia</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Shedrack Mwiine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── FILTER BAR ── */
+        .gallery-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            padding: 2.5rem var(--page-pad) 0;
+        }
+
+        .filter-btn {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.45rem 1rem;
+            cursor: pointer;
+            transition: color var(--transition), border-color var(--transition), background var(--transition);
+        }
+
+        .filter-btn:hover {
+            color: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .filter-btn.active {
+            background: var(--ink);
+            color: var(--paper);
+            border-color: var(--ink);
+        }
+
+        /* ── GALLERY LIST ── */
+        .gallery-list {
+            padding: 3rem var(--page-pad) 6rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-entry {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            align-items: start;
+            cursor: pointer;
+        }
+
+        .gallery-entry:first-child {
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* Zigzag: even entries flip image to right */
+        .gallery-entry:nth-child(even) {
+            grid-template-columns: 1fr 300px;
+        }
+
+        .gallery-entry:nth-child(even) .gallery-entry-img {
+            order: 2;
+        }
+
+        .gallery-entry:nth-child(even) .gallery-entry-info {
+            order: 1;
+        }
+
+        /* ── IMAGE ── */
+        .gallery-entry-img {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            background: var(--card-bg);
+            flex-shrink: 0;
+        }
+
+        .gallery-entry-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        filter 0.4s ease;
+            filter: grayscale(10%) contrast(1.04);
+        }
+
+        .gallery-entry:hover .gallery-entry-img img {
+            transform: scale(1.04);
+            filter: grayscale(0%) contrast(1.02);
+        }
+
+        .gallery-entry-expand {
+            position: absolute;
+            bottom: 0.7rem;
+            right: 0.7rem;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(245, 240, 232, 0.6);
+            background: rgba(13, 13, 13, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .gallery-entry:hover .gallery-entry-expand {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-entry-expand svg {
+            width: 11px;
+            height: 11px;
+            fill: var(--paper);
+        }
+
+        /* ── TEXT — always visible, no hover required ── */
+        .gallery-entry-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.75rem;
+            padding-top: 0.2rem;
+        }
+
+        .gallery-entry-badge {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .gallery-entry-badge::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .gallery-entry-title {
+            font-family: var(--font-serif);
+            font-size: 1.55rem;
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .gallery-entry-desc {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 480px;
+            margin: 0;
+        }
+
+        .gallery-entry-location {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted-light);
+        }
+
+        .gallery-entry-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted-light);
+            margin-top: 0.35rem;
+            transition: color var(--transition);
+        }
+
+        .gallery-entry-cta svg {
+            width: 12px;
+            height: 12px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            transition: transform 0.25s ease;
+        }
+
+        .gallery-entry:hover .gallery-entry-cta {
+            color: var(--ink);
+        }
+
+        .gallery-entry:hover .gallery-entry-cta svg {
+            transform: translateX(3px);
+        }
+
+        /* Hidden for filter */
+        .gallery-entry.hidden { display: none; }
+
+        /* ── LIGHTBOX ── */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(13, 13, 13, 0.93);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .lightbox.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-inner {
+            position: relative;
+            max-width: 86vw;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .lightbox-inner img {
+            max-width: 100%;
+            max-height: 72vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-meta { text-align: center; }
+
+        .lightbox-title {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--paper);
+            margin-bottom: 0.3rem;
+        }
+
+        .lightbox-desc {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            color: rgba(245, 240, 232, 0.5);
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -1.2rem;
+            right: 0;
+            transform: translateY(-100%);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(245, 240, 232, 0.5);
+            cursor: pointer;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+            padding: 0;
+        }
+
+        .lightbox-close:hover { color: var(--paper); }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid rgba(245, 240, 232, 0.2);
+            color: rgba(245, 240, 232, 0.5);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+        }
+
+        .lightbox-nav:hover {
+            border-color: rgba(245, 240, 232, 0.7);
+            color: var(--paper);
+            background: rgba(245, 240, 232, 0.06);
+        }
+
+        .lightbox-prev { left: -4.5rem; }
+        .lightbox-next { right: -4.5rem; }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: -2.8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            color: rgba(245, 240, 232, 0.3);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 860px) {
+            .gallery-entry,
+            .gallery-entry:nth-child(even) {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .gallery-entry:nth-child(even) .gallery-entry-img { order: 0; }
+            .gallery-entry:nth-child(even) .gallery-entry-info { order: 1; }
+            .gallery-entry-img { aspect-ratio: 16 / 9; }
+            .gallery-entry-title { font-size: 1.3rem; }
+            .lightbox-prev { left: -3rem; }
+            .lightbox-next { right: -3rem; }
+        }
+
+        @media (max-width: 560px) {
+            .gallery-filters { padding: 1.5rem var(--page-pad) 0; }
+            .gallery-list    { padding: 2rem var(--page-pad) 4rem; }
+            .lightbox-prev,
+            .lightbox-next   { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav">
+    <a href="index.html" class="nav-brand">Shedrack</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="nav-drawer">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero reveal">
+    <p class="page-hero-eyebrow">Portfolio — Visual Record</p>
+    <h1 class="page-hero-title">In the <em>Field</em></h1>
+    <p class="page-hero-sub">Moments from research, fieldwork, speaking engagements, and collaborations across East Africa and beyond.</p>
+</section>
+
+<!-- ── FILTER BAR ── -->
+<div class="gallery-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="speaking">Speaking</button>
+    <button class="filter-btn" data-filter="fieldwork">Fieldwork</button>
+    <button class="filter-btn" data-filter="awards">Awards</button>
+    <button class="filter-btn" data-filter="research">Research</button>
+</div>
+
+<!-- ── GALLERY LIST ── -->
+<div class="gallery-list" id="galleryGrid">
+
+    <div class="gallery-entry reveal"
+         data-category="speaking"
+         data-title="Fintech Presentation – Malaysia"
+         data-desc="Presenting and discussing fintech innovations at the Institute for Mathematical Research (INSPEM), UPM, Serdang, Malaysia.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/ncR9KYD5/image5.jpg" alt="Fintech Presentation at INSPEM, Malaysia" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Speaking</span>
+            <h3 class="gallery-entry-title">Fintech Presentation — Malaysia</h3>
+            <p class="gallery-entry-desc">Presenting and discussing fintech innovations at the Institute for Mathematical Research (INSPEM), UPM, Serdang, Malaysia.</p>
+            <span class="gallery-entry-location">INSPEM · UPM · Serdang</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-1"
+         data-category="fieldwork"
+         data-title="Field Discussion – Tanzania"
+         data-desc="Discussing the agricultural landscape in Iringa, Tanzania with my IDH colleague during an on-site visit.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/ZK7vPFds/image1.jpg" alt="Field Discussion in Iringa, Tanzania" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Fieldwork</span>
+            <h3 class="gallery-entry-title">Field Discussion — Tanzania</h3>
+            <p class="gallery-entry-desc">Discussing the agricultural landscape in Iringa, Tanzania with my IDH colleague during an on-site visit.</p>
+            <span class="gallery-entry-location">Iringa · IDH Site Visit</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-2"
+         data-category="research"
+         data-title="Appreciation Moment – KCB"
+         data-desc="Presenting a token of appreciation to the CFO of KCB Bank Group Kenya, Mr Lawrence Kimathi.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/CLPnCHqQ/image2.jpg" alt="Presenting appreciation to KCB CFO Lawrence Kimathi" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Research</span>
+            <h3 class="gallery-entry-title">Appreciation Moment — KCB</h3>
+            <p class="gallery-entry-desc">Presenting a token of appreciation to the CFO of KCB Bank Group Kenya, Mr Lawrence Kimathi.</p>
+            <span class="gallery-entry-location">KCB Bank Group · Nairobi</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-3"
+         data-category="speaking"
+         data-title="Data Privacy Conference"
+         data-desc="Invited to present my research in data systems resilience at the Kenya Data Privacy and Governance Conference.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/qMb6cX3F/image3.jpg" alt="Kenya Data Privacy and Governance Conference" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Speaking</span>
+            <h3 class="gallery-entry-title">Data Privacy Conference</h3>
+            <p class="gallery-entry-desc">Invited to present my research in data systems resilience at the Kenya Data Privacy and Governance Conference.</p>
+            <span class="gallery-entry-location">Kenya Data Privacy &amp; Governance</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-4"
+         data-category="speaking"
+         data-title="National Economics Debate"
+         data-desc="Debating economic policy and Public vs Private sector contribution at the 3rd Annual Kenya National Economics Debate, University of Nairobi.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/L6CgkB10/image4.jpg" alt="3rd Annual Kenya National Economics Debate" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Speaking</span>
+            <h3 class="gallery-entry-title">National Economics Debate</h3>
+            <p class="gallery-entry-desc">Debating economic policy and Public vs Private sector contribution at the 3rd Annual Kenya National Economics Debate, University of Nairobi.</p>
+            <span class="gallery-entry-location">3rd Annual · University of Nairobi</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-5"
+         data-category="awards"
+         data-title="Hackathon Victory – KAPS 2024"
+         data-desc="Victory at the 2024 KAPS Nairobi Hackathon. 1st place in financial management &amp; governance applications, 1st runner-up overall in Kenya.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/BQYP5cFf/image6.jpg" alt="2024 KAPS Nairobi Hackathon Victory" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Awards</span>
+            <h3 class="gallery-entry-title">Hackathon Victory — KAPS 2024</h3>
+            <p class="gallery-entry-desc">Victory at the 2024 KAPS Nairobi Hackathon. 1st place in financial management &amp; governance applications, 1st runner-up overall in Kenya.</p>
+            <span class="gallery-entry-location">1st Place · Financial Management</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal"
+         data-category="speaking"
+         data-title="With Dean &amp; SIMS Admin"
+         data-desc="Photo with the Dean and administrative team at the Institute of Mathematical Sciences, Strathmore, after speaking at the African Statistics Day.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/gkSLyqh9/image7.jpg" alt="With Dean and admin at Strathmore SIMS" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Speaking</span>
+            <h3 class="gallery-entry-title">With Dean &amp; SIMS Admin</h3>
+            <p class="gallery-entry-desc">Photo with the Dean and administrative team at the Institute of Mathematical Sciences, Strathmore, after speaking at the African Statistics Day.</p>
+            <span class="gallery-entry-location">Strathmore · African Statistics Day</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-1"
+         data-category="fieldwork"
+         data-title="IDH Team Site Visit – Tanzania"
+         data-desc="Myself (far left), the IDH team and the Khebhandza team (agri-SME) during a site visit in Mbeya, Tanzania.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/gkSLyqhF/image8.jpg" alt="IDH team site visit in Mbeya, Tanzania" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Fieldwork</span>
+            <h3 class="gallery-entry-title">IDH Team Site Visit — Tanzania</h3>
+            <p class="gallery-entry-desc">Myself (far left), the IDH team and the Khebhandza team (agri-SME) during a site visit in Mbeya, Tanzania.</p>
+            <span class="gallery-entry-location">Mbeya · IDH &amp; Khebhandza</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+    <div class="gallery-entry reveal reveal-delay-2"
+         data-category="speaking"
+         data-title="African Statistics Day Conference"
+         data-desc="Invited to speak at the African Statistics Day Conference. Shared views on the current and future reality of fintech, investments and partnerships within the African landscape.">
+        <div class="gallery-entry-img">
+            <img src="https://i.postimg.cc/WtLNHf6t/Screenshot_2026_03_01_205905.png" alt="Speaking at African Statistics Day Conference" loading="lazy">
+            <div class="gallery-entry-expand">
+                <svg viewBox="0 0 24 24"><path d="M15 3h6v6h-2V5h-4V3zM3 15v6h6v-2H5v-4H3zm18 0h-2v4h-4v2h6v-6zM3 9V3h6v2H5v4H3z"/></svg>
+            </div>
+        </div>
+        <div class="gallery-entry-info">
+            <span class="gallery-entry-badge">Speaking</span>
+            <h3 class="gallery-entry-title">African Statistics Day</h3>
+            <p class="gallery-entry-desc">Invited to speak at the African Statistics Day Conference. Shared views on the current and future reality of fintech, investments and partnerships within the African landscape.</p>
+            <span class="gallery-entry-location">Fintech · Investments · Africa</span>
+            <span class="gallery-entry-cta">View image <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+    </div>
+
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lightbox-inner">
+        <button class="lightbox-close" id="lbClose">✕ &nbsp;Close</button>
+        <img src="" alt="" id="lbImg">
+        <div class="lightbox-meta">
+            <p class="lightbox-title" id="lbTitle"></p>
+            <p class="lightbox-desc" id="lbDesc"></p>
+        </div>
+        <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous">&#8592;</button>
+        <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next">&#8594;</button>
+        <span class="lightbox-counter" id="lbCounter"></span>
+    </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <span class="footer-left">© 2026 Shedrack Mwiine</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/shedrack-mwiine-6a0851293" target="_blank">LinkedIn</a>
+        <a href="https://github.com/MwiineShedrack" target="_blank">GitHub</a>
+        <a href="https://independent.academia.edu/ShedrackMwiine" target="_blank">Academia</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+(function () {
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const allEntries = document.querySelectorAll('.gallery-entry');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            allEntries.forEach(entry => {
+                entry.classList.toggle('hidden', filter !== 'all' && entry.dataset.category !== filter);
+            });
+        });
+    });
+
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lbImg');
+    const lbTitle   = document.getElementById('lbTitle');
+    const lbDesc    = document.getElementById('lbDesc');
+    const lbClose   = document.getElementById('lbClose');
+    const lbPrev    = document.getElementById('lbPrev');
+    const lbNext    = document.getElementById('lbNext');
+    const lbCounter = document.getElementById('lbCounter');
+
+    let current = 0;
+    let visible  = [];
+
+    function getVisible() {
+        return Array.from(allEntries).filter(e => !e.classList.contains('hidden'));
+    }
+
+    function openAt(index) {
+        visible = getVisible();
+        current = index;
+        const entry = visible[current];
+        if (!entry) return;
+        lbImg.src = entry.querySelector('img').src;
+        lbImg.alt = entry.querySelector('img').alt;
+        lbTitle.textContent = entry.dataset.title || '';
+        lbDesc.textContent  = entry.dataset.desc  || '';
+        lbCounter.textContent = `${current + 1} / ${visible.length}`;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function goTo(dir) {
+        visible = getVisible();
+        current = (current + dir + visible.length) % visible.length;
+        openAt(current);
+    }
+
+    allEntries.forEach(entry => {
+        entry.addEventListener('click', () => {
+            visible = getVisible();
+            openAt(visible.indexOf(entry));
+        });
+    });
+
+    lbClose.addEventListener('click', close);
+    lbPrev.addEventListener('click',  () => goTo(-1));
+    lbNext.addEventListener('click',  () => goTo(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+
+    document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape')     close();
+        if (e.key === 'ArrowLeft')  goTo(-1);
+        if (e.key === 'ArrowRight') goTo(1);
+    });
+
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+    lightbox.addEventListener('touchend',   e => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) goTo(diff > 0 ? 1 : -1);
+    });
+
+})();
+</script>
+</body>
+</html>

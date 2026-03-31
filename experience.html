@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Shedrack Mwiine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* ── EXPERIENCE PAGE STYLES ── */
+        .experience-section {
+            padding: 4rem var(--page-pad) 6rem;
+        }
+
+        .experience-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3.5rem;
+        }
+
+        .experience-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .experience-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .experience-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        /* ── FIXED TIMELINE ── */
+        .experience-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 110px 1fr;   /* Increased width for dates */
+            gap: 2.8rem;                        /* More horizontal space */
+            align-items: start;
+        }
+
+        .experience-date {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            padding-top: 0.35rem;
+            text-align: right;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+
+        .experience-content {
+            border-left: 1px solid var(--border-light);
+            padding-left: 2.6rem;               /* More padding after the line */
+        }
+
+        .experience-role {
+            font-family: var(--font-serif);
+            font-size: 1.32rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+            line-height: 1.25;
+        }
+
+        .experience-company {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+            margin-bottom: 1.6rem;
+        }
+
+        .experience-bullets {
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .experience-bullets ul {
+            padding-left: 1.3rem;
+            margin: 0;
+        }
+
+        .experience-bullets li {
+            margin-bottom: 1.1rem;
+        }
+
+        .experience-bullets li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .experience-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .experience-date {
+                text-align: left;
+                padding-top: 0;
+            }
+            .experience-content {
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 580px) {
+            .experience-section {
+                padding: 3rem var(--page-pad) 4rem;
+            }
+            .experience-header {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .experience-timeline {
+                gap: 4rem;
+            }
+            .experience-item {
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="nav">
+    <a href="index.html" class="nav-brand">Shedrack</a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="education.html">Education</a></li>
+            <li><a href="experience.html" class="active">Experience</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="nav-drawer">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero reveal">
+    <p class="page-hero-eyebrow">Journey — Professional Path</p>
+    <h1 class="page-hero-title">Experience &amp; <em>Roles</em></h1>
+    <p class="page-hero-sub">Strategic roles across climate finance, sustainable development, data analytics, and actuarial services in East Africa.</p>
+</section>
+
+<!-- ── EXPERIENCE CONTENT ── -->
+<section class="experience-section">
+    <div class="experience-header">
+        <div>
+            <p class="experience-label">PROFESSIONAL JOURNEY</p>
+            <h2 class="experience-title">Experience <em>Timeline</em></h2>
+        </div>
+    </div>
+
+    <div class="experience-timeline">
+
+        <div class="experience-item reveal">
+            <div class="experience-date">Jan 2026 – Present</div>
+            <div class="experience-content">
+                <h3 class="experience-role">Consultant – Economic &amp; Statistical Research</h3>
+                <p class="experience-company">Decarbonize Initiative</p>
+                <div class="experience-bullets">
+                    <ul>
+                        <li>Conducted economic and statistical research on carbon sequestration and climate mitigation projects across Sub-Saharan Africa, focusing on economic viability of nature-based and engineered carbon removal solutions</li>
+                        <li>Developed financial and investment models to evaluate ROI, capital requirements, and scalability potential of biochar production and carbon credit facilities</li>
+                        <li>Led techno-economic feasibility assessments for biochar production facilities in Kenya, integrating engineering assumptions, feedstock availability, operational costs, and projected carbon credit revenues</li>
+                        <li>Designed and implemented primary data collection frameworks including field surveys, stakeholder interviews, and operational data gathering</li>
+                        <li>Applied econometric and statistical analysis to evaluate production cost structures, supply chain dynamics, and carbon market pricing; produced technical reports and data-driven insights</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item reveal reveal-delay-1">
+            <div class="experience-date">May – Dec 2025</div>
+            <div class="experience-content">
+                <h3 class="experience-role">Business Analyst</h3>
+                <p class="experience-company">IDH – The Sustainable Trade Initiative</p>
+                <div class="experience-bullets">
+                    <ul>
+                        <li>Strengthened the impact and investability of smallholder-inclusive business models through evidence-based analytical frameworks for sustainable agriculture and inclusive value chains</li>
+                        <li>Shaped internal and stakeholder data processing and analytical workflows to enable structured collaboration between IDH and partners</li>
+                        <li>Conducted advanced data analytics on large datasets to generate insights across sustainable landscape programs, agricultural value chains, and blended finance initiatives</li>
+                        <li>Performed holistic due diligence and impact assessments of companies and investment opportunities, evaluating commercial, social, and environmental outcomes</li>
+                        <li>Developed benchmarking insights from 185+ smallholder-inclusive business model case studies and synthesized strategic recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item reveal reveal-delay-2">
+            <div class="experience-date">Dec 2024 – May 2025</div>
+            <div class="experience-content">
+                <h3 class="experience-role">Data Analyst</h3>
+                <p class="experience-company">Srimad Rajchandra Institute</p>
+                <div class="experience-bullets">
+                    <ul>
+                        <li>Developed analytics models and automated data pipelines to generate actionable insights and streamline decision-making</li>
+                        <li>Designed and deployed interactive Power BI dashboards and reports to visualize key performance indicators (KPIs)</li>
+                        <li>Built robust Power BI data models using DAX and Power Query for real-time tracking of program performance</li>
+                        <li>Established database schemas and data governance frameworks to ensure data quality and compliance</li>
+                        <li>Developed Python scripts for database automation and used R for advanced statistical analysis and exploratory data analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item reveal reveal-delay-3">
+            <div class="experience-date">Jan – May 2024</div>
+            <div class="experience-content">
+                <h3 class="experience-role">Actuarial Analyst Intern</h3>
+                <p class="experience-company">Kenbright Actuarial Services</p>
+                <div class="experience-bullets">
+                    <ul>
+                        <li>Calculated insurance premiums for multiple product lines using actuarial models incorporating risk assumptions and historical claims data</li>
+                        <li>Developed automation scripts in R to streamline actuarial calculations and reporting workflows</li>
+                        <li>Performed financial forecasting and predictive analysis to estimate future values in cases of delayed or incomplete datasets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item reveal">
+            <div class="experience-date">Jan – May 2023</div>
+            <div class="experience-content">
+                <h3 class="experience-role">Data Management Intern</h3>
+                <p class="experience-company">Texas Cancer Centre</p>
+                <div class="experience-bullets">
+                    <ul>
+                        <li>Executed accurate data management and entry to support operational workflows</li>
+                        <li>Managed billing and invoicing processes to ensure timely and precise financial records</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <span class="footer-left">© 2026 Shedrack Mwiine</span>
+    <div class="footer-right">
+        <a href="https://www.linkedin.com/in/shedrack-mwiine-6a0851293" target="_blank">LinkedIn</a>
+        <a href="https://github.com/MwiineShedrack" target="_blank">GitHub</a>
+        <a href="https://independent.academia.edu/ShedrackMwiine" target="_blank">Academia</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
